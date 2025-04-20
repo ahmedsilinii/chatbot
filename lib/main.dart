@@ -1,4 +1,5 @@
 import 'package:chatbot/onboarding.dart';
+import 'package:chatbot/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: false,
       ),
-      home: const Onboarding(),
+      home: const DebugScreen(),
     );
   }
 }

@@ -14,14 +14,13 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _controller = TextEditingController();
 
   final List<Message> _messages = [
-    Message(text: "Hi", isUser: true),
-    Message(text: "Hello", isUser: false),
-    Message(text: "Yoyys", isUser: true),
-    Message(text: "Boom", isUser: false),
+    Message(text: "Hello! How can I assist you today?", isUser: false),
   ];
+
 
   callGeminiModel() async {
     try {
+      
       final model = GenerativeModel(
         model: 'gemini-pro',
         apiKey: dotenv.env['API_KEY']!,
@@ -33,6 +32,8 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         _messages.add(Message(text: response.text!, isUser: false));
       });
+
+      _controller.clear();
     } catch (e) {
       // ignore: avoid_print
       print('Error: $e');
@@ -144,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       child: Image.asset('assets/send.png'),
-                      onTap: () {},
+                      onTap:callGeminiModel,
                     ),
                   ),
                 ],

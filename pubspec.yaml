@@ -37,6 +37,7 @@ dependencies:
   flutter_native_splash: ^2.4.6
   flutter_dotenv: ^5.2.1
   google_generative_ai: ^0.4.7
+  http: ^1.3.0
 
 
 
@@ -73,6 +74,7 @@ flutter:
     - assets/send.png
     - assets/splashscreen.png 
     - assets/volume-high.png
+    - .env
   
 
   # An image asset can refer to one or more resolution-specific "variants", see
