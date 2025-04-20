@@ -26,24 +26,27 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         centerTitle: false,
         backgroundColor: Colors.white,
+        elevation: 4.0, 
+        // ignore: deprecated_member_use
+        shadowColor: Colors.grey.withOpacity(0.5),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Image.asset('assets/gpt-robot.png'),
-                SizedBox(width: 8),
-                Text(
-                  'Tnaffes GPT',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
+        Row(
+          children: [
+            Image.asset('assets/gpt-robot.png'),
+            SizedBox(width: 8),
+            Text(
+          'Tnaffes GPT',
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
             ),
-            Image.asset('assets/volume-high.png', color: Colors.blue[800]),
+          ],
+        ),
+        Image.asset('assets/volume-high.png', color: Colors.blue[800]),
           ],
         ),
       ),
