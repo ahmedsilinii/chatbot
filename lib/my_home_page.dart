@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
-          
+
           //input field
           Padding(
             padding: const EdgeInsets.only(
@@ -118,8 +118,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   SizedBox(width: 8),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.send)),
-                ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      child: Image.asset('assets/send.png'),
+                      onTap: () {},
+                    ),
+                  ),
+                ], 
               ),
             ),
           ),
