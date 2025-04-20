@@ -17,26 +17,35 @@ class _MyHomePageState extends State<MyHomePage> {
     Message(text: "Hello! How can I assist you today?", isUser: false),
   ];
 
-
   callGeminiModel() async {
     try {
-      
-      final model = GenerativeModel(
-        model: 'gemini-pro',
-        apiKey: dotenv.env['API_KEY']!,
-      );
       final prompt = _controller.text.trim();
+
+      if (prompt.isEmpty) return;
+
+      setState(() {
+        _messages.add(Message(text: prompt, isUser: true));
+      });
+
+      final model = GenerativeModel(
+        model: 'gemini-1.5-flash-latest',
+        apiKey: dotenv.env['API_KEY']!,
+        safetySettings: [
+          SafetySetting(HarmCategory.hateSpeech, HarmBlockThreshold.high),
+        ],
+      );
+
       final content = [Content.text(prompt)];
       final response = await model.generateContent(content);
-
       setState(() {
         _messages.add(Message(text: response.text!, isUser: false));
       });
 
       _controller.clear();
     } catch (e) {
-      // ignore: avoid_print
-      print('Error: $e');
+      setState(() {
+        _messages.add(Message(text: 'An error occurred: $e', isUser: false));
+      });
     }
   }
 
@@ -144,8 +153,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
+                      onTap: callGeminiModel,
                       child: Image.asset('assets/send.png'),
-                      onTap:callGeminiModel,
                     ),
                   ),
                 ],

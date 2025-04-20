@@ -1,5 +1,4 @@
 import 'package:chatbot/onboarding.dart';
-import 'package:chatbot/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -14,12 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'AI Assitant',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: false,
       ),
-      home: const DebugScreen(),
+      home: const Onboarding(),
     );
   }
 }
