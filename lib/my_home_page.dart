@@ -11,6 +11,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController _controller = TextEditingController();
+
   final List<Message> _messages = [
     Message(text: "Hi", isUser: true),
     Message(text: "Hello", isUser: false),
@@ -53,17 +55,46 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
-          Text("Type a message"),
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Type your message here...',
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 32.0,
+              left: 16.0,
+              right: 16.0,
             ),
-            onSubmitted: (text) {
-              setState(() {
-                _messages.add(Message(text: text, isUser: true));
-              });
-            },
+
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(32),
+                boxShadow: [
+                  BoxShadow(
+                    // ignore: deprecated_member_use
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        hintText: "Type a message",
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  IconButton(onPressed: () {}, icon: Icon(Icons.send)),
+                ],
+              ),
+            ),
           ),
         ],
       ),
