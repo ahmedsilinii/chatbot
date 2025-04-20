@@ -1,4 +1,4 @@
-import 'package:chatbot/my_home_page.dart';
+import 'package:chatbot/onboarding.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,9 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
+        useMaterial3: false
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Onboarding(),
     );
   }
 }
