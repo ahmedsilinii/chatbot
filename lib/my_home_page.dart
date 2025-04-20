@@ -23,8 +23,33 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        backgroundColor: Colors.white,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Image.asset('assets/gpt-robot.png'),
+                SizedBox(width: 8),
+                Text(
+                  'Tnaffes GPT',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            Image.asset('assets/volume-high.png', color: Colors.blue[800]),
+          ],
+        ),
+      ),
       body: Column(
         children: [
+          //msg list
           Expanded(
             child: ListView.builder(
               itemCount: _messages.length,
@@ -55,6 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
+          
+          //input field
           Padding(
             padding: const EdgeInsets.only(
               bottom: 32.0,
