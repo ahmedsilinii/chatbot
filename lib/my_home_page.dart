@@ -11,7 +11,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   final List<Message> _messages = [
     Message(text: "Hi", isUser: true),
     Message(text: "Hello", isUser: false),
@@ -31,14 +30,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 final message = _messages[index];
                 return ListTile(
                   title: Align(
-                    alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
+                    alignment:
+                        message.isUser
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
                     child: Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         color: message.isUser ? Colors.blue : Colors.grey[300],
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: Text(message.text,
+                      child: Text(
+                        message.text,
                         style: TextStyle(
                           color: message.isUser ? Colors.white : Colors.black,
                           fontWeight: FontWeight.bold,
@@ -50,7 +53,18 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
-       
+          Text("Type a message"),
+          TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Type your message here...',
+            ),
+            onSubmitted: (text) {
+              setState(() {
+                _messages.add(Message(text: text, isUser: true));
+              });
+            },
+          ),
         ],
       ),
     );
