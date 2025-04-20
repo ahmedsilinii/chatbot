@@ -1,9 +1,10 @@
 import 'package:chatbot/message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
-
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -19,33 +20,52 @@ class _MyHomePageState extends State<MyHomePage> {
     Message(text: "Boom", isUser: false),
   ];
 
+  callGeminiModel() async {
+    try {
+      final model = GenerativeModel(
+        model: 'gemini-pro',
+        apiKey: dotenv.env['API_KEY']!,
+      );
+      final prompt = _controller.text.trim();
+      final content = [Content.text(prompt)];
+      final response = await model.generateContent(content);
+
+      setState(() {
+        _messages.add(Message(text: response.text!, isUser: false));
+      });
+    } catch (e) {
+      // ignore: avoid_print
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
         backgroundColor: Colors.white,
-        elevation: 4.0, 
+        elevation: 4.0,
         // ignore: deprecated_member_use
         shadowColor: Colors.grey.withOpacity(0.5),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-        Row(
-          children: [
-            Image.asset('assets/gpt-robot.png'),
-            SizedBox(width: 8),
-            Text(
-          'Tnaffes GPT',
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+            Row(
+              children: [
+                Image.asset('assets/gpt-robot.png'),
+                SizedBox(width: 8),
+                Text(
+                  'Tnaffes GPT',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-        Image.asset('assets/volume-high.png', color: Colors.blue[800]),
+            Image.asset('assets/volume-high.png', color: Colors.blue[800]),
           ],
         ),
       ),
@@ -127,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onTap: () {},
                     ),
                   ),
-                ], 
+                ],
               ),
             ),
           ),
